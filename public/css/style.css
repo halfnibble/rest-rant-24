@@ -1,0 +1,11 @@
+h1 {
+    text-align: center;
+    color: cornflowerblue;
+}
+
+img {
+    display: block;
+    width: 600px;
+    max-width: 100%;
+    margin: 15px auto;
+}

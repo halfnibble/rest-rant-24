@@ -1,9 +1,13 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+const render = require('./render');
+
+// MIDDLEWARE
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-    res.send('Hello REST-Rant World!');
+    res.send(render('Home'));
 });
 
 // Load the places controller
@@ -12,7 +16,7 @@ app.use('/places', require('./controllers/places'));
 // Wildcard/404 route
 app.get('*', (req, res) => {
     console.log('user requested unknown route: ', req.url);
-    res.status(404).send('<h1>404 Page</h1>');
+    res.status(404).send(render('404'));
 });
 
 app.listen(process.env.PORT, () => {

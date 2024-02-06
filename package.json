@@ -10,7 +10,12 @@
     "author": "Josh Wedekind",
     "license": "MIT",
     "dependencies": {
+        "@babel/core": "^7.23.9",
+        "@babel/preset-react": "^7.23.3",
+        "@babel/register": "^7.23.7",
         "dotenv": "^16.4.1",
-        "express": "^4.18.2"
+        "express": "^4.18.2",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
     }
 }
