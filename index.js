@@ -5,6 +5,7 @@ const render = require('./render');
 
 // MIDDLEWARE
 app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
     res.send(render('Home'));
