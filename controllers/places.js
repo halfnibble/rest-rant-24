@@ -4,7 +4,7 @@ const render = require('../render');
 const places = require('../models/places');
 
 router.get('/', (req, res) => {
-    res.send(render('Index', { places: places }));
+    res.send(render('places/Index', { places: places }));
 });
 
 module.exports = router;

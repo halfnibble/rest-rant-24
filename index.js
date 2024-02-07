@@ -16,7 +16,7 @@ app.use('/places', require('./controllers/places'));
 // Wildcard/404 route
 app.get('*', (req, res) => {
     console.log('user requested unknown route: ', req.url);
-    res.status(404).send(render('404'));
+    res.status(404).send(render('Error404'));
 });
 
 app.listen(process.env.PORT, () => {
