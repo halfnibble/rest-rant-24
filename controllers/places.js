@@ -25,10 +25,10 @@ router.get('/:id', (req, res) => {
         res.status(400).send(render('Error404'));
     } else {
         // express-react-views:
-        // res.render('places/Show', { place: places[id]});
+        // res.render('places/Show', { place: places[id], id: id });
 
         // custom render function:
-        res.send(render('places/Show', { place: places[id] }));
+        res.send(render('places/Show', { place: places[id], id: id }));
     }
 });
 
@@ -49,6 +49,27 @@ router.post('/', (req, res) => {
     }
     places.push(newPlace);
     res.redirect('/places');
+});
+
+// Delete a Place
+router.delete('/:id', (req, res) => {
+    const id = Number(req.params.id);
+    if (isNaN(id)) {
+        // express-react-views:
+        // res.status(400).render('Error404')
+
+        // custom render function:
+        res.status(400).send(render('Error404'));
+    } else if (!places[id]) {
+        // express-react-views:
+        // res.status(400).render('Error404')
+
+        // custom render function:
+        res.status(400).send(render('Error404'));
+    } else {
+        places.splice(id, 1);
+        res.redirect('/places');
+    }
 });
 
 module.exports = router;
