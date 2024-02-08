@@ -1,3 +1,7 @@
+body {
+    background-color: lightblue;
+}
+
 h1 {
     text-align: center;
     color: cornflowerblue;
@@ -12,5 +16,33 @@ img {
 
 main {
     max-width: 100%;
-    padding: 0 15px;
+    padding: 0 20px 40px;
+    background-color: #FFF;
+}
+
+nav {
+    background-color: cornflowerblue;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+}
+
+nav li {
+    display: inline;
+    margin-right: 25px;
+}
+
+nav a {
+    color: white;
+    font-size: 1.5em;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: pink;
 }
