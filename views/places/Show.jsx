@@ -29,11 +29,11 @@ const Show = ({ place, id }) => {
                 <div className='row align-items-center'>
                     <div className='col'>
                         <a href={`/places/${id}/edit`} className='btn btn-warning'>
-                            Edit
+                            <i className='bi bi-pencil'></i> Edit
                         </a>
                         <form action={`/places/${id}?_method=DELETE`} method='POST'>
                             <button type='submit' className='btn btn-danger'>
-                                Delete
+                                <i className='bi bi-trash'></i> Delete
                             </button>
                         </form>
                     </div>

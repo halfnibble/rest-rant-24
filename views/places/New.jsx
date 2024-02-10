@@ -36,7 +36,7 @@ const New = () => {
                     </div>
                     <div className='mb-3'>
                         <button type='submit' className='btn btn-primary'>
-                            Add Place
+                            <i className='bi bi-plus-circle-fill'></i> Add Place
                         </button>
                     </div>
                 </form>
