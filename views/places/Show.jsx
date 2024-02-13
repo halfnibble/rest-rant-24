@@ -1,7 +1,7 @@
 const React = require('react');
 const Default = require('../layouts/Default');
 
-const Show = ({ place, id }) => {
+const Show = ({ place }) => {
     // cuisines is comma separated string, E.g. "Italian, Chinese, Mexican"
     const cuisinesBadges = place.cuisines.split(',').map((cuisine) => {
         return (
@@ -28,10 +28,10 @@ const Show = ({ place, id }) => {
                 </div>
                 <div className='row align-items-center'>
                     <div className='col'>
-                        <a href={`/places/${id}/edit`} className='btn btn-warning'>
+                        <a href={`/places/${place.id}/edit`} className='btn btn-warning'>
                             <i className='bi bi-pencil'></i> Edit
                         </a>
-                        <form action={`/places/${id}?_method=DELETE`} method='POST'>
+                        <form action={`/places/${place.id}?_method=DELETE`} method='POST'>
                             <button type='submit' className='btn btn-danger'>
                                 <i className='bi bi-trash'></i> Delete
                             </button>

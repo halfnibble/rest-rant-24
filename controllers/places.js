@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const render = require('../render');
-const places = require('../models/places');
+const places = []; // @TODO: Delete this line after connecting to MongoDB
+const db = require('../models');
 
 // Create a new Place
 router.get('/new', (req, res) => {
@@ -19,37 +20,38 @@ router.post('/', (req, res) => {
     if (!newPlace.state) {
         newPlace.state = 'USA';
     }
-    places.push(newPlace);
-    res.redirect('/places');
+    db.Place.create(newPlace)
+        .then((place) => {
+            res.redirect('/places');
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(400).send('Bad Request');
+        });
 });
 
 // GET List of Places
 router.get('/', (req, res) => {
-    res.send(render('places/Index', { places: places }));
+    db.Place.find()
+        .then((places) => {
+            res.send(render('places/Index', { places }));
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(404).send(render('Error404'));
+        });
 });
 
 // GET Details of a Place
 router.get('/:id', (req, res) => {
-    const id = Number(req.params.id);
-    if (isNaN(id)) {
-        // express-react-views:
-        // res.status(400).render('Error404')
-
-        // custom render function:
-        res.status(400).send(render('Error404'));
-    } else if (!places[id]) {
-        // express-react-views:
-        // res.status(400).render('Error404')
-
-        // custom render function:
-        res.status(400).send(render('Error404'));
-    } else {
-        // express-react-views:
-        // res.render('places/Show', { place: places[id], id: id });
-
-        // custom render function:
-        res.send(render('places/Show', { place: places[id], id: id }));
-    }
+    db.Place.findById(req.params.id)
+        .then((place) => {
+            res.send(render('places/Show', { place }));
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(404).send(render('Error404'));
+        });
 });
 
 // Update a Place

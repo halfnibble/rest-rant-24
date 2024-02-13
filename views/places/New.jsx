@@ -35,6 +35,10 @@ const New = () => {
                         />
                     </div>
                     <div className='mb-3'>
+                        <label htmlFor='founded'>Year Founded</label>
+                        <input type='number' name='founded' id='founded' className='form-control' />
+                    </div>
+                    <div className='mb-3'>
                         <button type='submit' className='btn btn-primary'>
                             <i className='bi bi-plus-circle-fill'></i> Add Place
                         </button>
