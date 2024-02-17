@@ -1,12 +1,12 @@
 const React = require('react');
 const Default = require('../layouts/Default');
 
-const Edit = (data) => {
+const Edit = ({ place }) => {
     return (
         <Default>
             <main>
                 <h1>Edit Place</h1>
-                <form action={`/places/${data.id}?_method=PUT`} method='POST'>
+                <form action={`/places/${place.id}?_method=PUT`} method='POST'>
                     <div className='mb-3'>
                         <label htmlFor='name'>Place Name</label>
                         <input
@@ -14,7 +14,7 @@ const Edit = (data) => {
                             name='name'
                             id='name'
                             className='form-control'
-                            defaultValue={data.place.name}
+                            defaultValue={place.name}
                         />
                     </div>
 
@@ -25,7 +25,7 @@ const Edit = (data) => {
                             name='pic'
                             id='pic'
                             className='form-control'
-                            defaultValue={data.place.pic}
+                            defaultValue={place.pic}
                         />
                     </div>
                     <div className='mb-3'>
@@ -35,7 +35,7 @@ const Edit = (data) => {
                             name='city'
                             id='city'
                             className='form-control'
-                            defaultValue={data.place.city}
+                            defaultValue={place.city}
                         />
                     </div>
                     <div className='mb-3'>
@@ -45,7 +45,7 @@ const Edit = (data) => {
                             name='state'
                             id='state'
                             className='form-control'
-                            defaultValue={data.place.state}
+                            defaultValue={place.state}
                         />
                     </div>
                     <div className='mb-3'>
@@ -55,7 +55,7 @@ const Edit = (data) => {
                             name='cuisines'
                             id='cuisines'
                             className='form-control'
-                            defaultValue={data.place.cuisines}
+                            defaultValue={place.cuisines}
                             required
                         />
                     </div>

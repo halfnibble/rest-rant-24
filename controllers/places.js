@@ -50,65 +50,37 @@ router.get('/:id', (req, res) => {
 
 // Update a Place
 router.get('/:id/edit', (req, res) => {
-    const id = Number(req.params.id);
-    if (isNaN(id)) {
-        // express-react-views:
-        // res.status(400).render('Error404')
-
-        // custom render function:
-        res.status(400).send(render('Error404'));
-    } else if (!places[id]) {
-        // express-react-views:
-        // res.status(400).render('Error404')
-
-        // custom render function:
-        res.status(400).send(render('Error404'));
-    } else {
-        // express-react-views:
-        // res.render('places/Edit', { place: places[id], id: id });
-        res.send(render('places/Edit', { place: places[id], id: id }));
-    }
+    db.Place.findById(req.params.id)
+        .then((place) => {
+            res.send(render('places/Edit', { place }));
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(404).send(render('Error404'));
+        });
 });
 
 router.put('/:id', (req, res) => {
-    const id = Number(req.params.id);
-    if (isNaN(id)) {
-        // express-react-views:
-        // res.status(400).render('Error404')
-
-        // custom render function:
-        res.status(400).send(render('Error404'));
-    } else if (!places[id]) {
-        // express-react-views:
-        // res.status(400).render('Error404')
-
-        // custom render function:
-        res.status(400).send(render('Error404'));
-    } else {
-        places[id] = { ...req.body };
-        res.redirect(`/places/${id}`);
-    }
+    db.Place.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        .then((updatedPlace) => {
+            res.redirect(`/places/${updatedPlace.id}`);
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(404).send(render('Error404'));
+        });
 });
 
 // Delete a Place
 router.delete('/:id', (req, res) => {
-    const id = Number(req.params.id);
-    if (isNaN(id)) {
-        // express-react-views:
-        // res.status(400).render('Error404')
-
-        // custom render function:
-        res.status(400).send(render('Error404'));
-    } else if (!places[id]) {
-        // express-react-views:
-        // res.status(400).render('Error404')
-
-        // custom render function:
-        res.status(400).send(render('Error404'));
-    } else {
-        places.splice(id, 1);
-        res.redirect('/places');
-    }
+    db.Place.findByIdAndDelete(req.params.id)
+        .then(() => {
+            res.redirect('/places');
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(404).send(render('Error404'));
+        });
 });
 
 module.exports = router;
