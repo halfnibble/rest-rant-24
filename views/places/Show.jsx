@@ -20,9 +20,7 @@ const Show = ({ place }) => {
                     </div>
                     <div className='col'>
                         <h1>{place.name}</h1>
-                        <p>
-                            Located at: {place.city}, {place.state}
-                        </p>
+                        <h5>{place.showEstablished()}</h5>
                         <p>{cuisinesBadges}</p>
                     </div>
                 </div>

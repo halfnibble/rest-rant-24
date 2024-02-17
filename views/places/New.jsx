@@ -36,7 +36,13 @@ const New = () => {
                     </div>
                     <div className='mb-3'>
                         <label htmlFor='founded'>Year Founded</label>
-                        <input type='number' name='founded' id='founded' className='form-control' />
+                        <input
+                            type='number'
+                            name='founded'
+                            id='founded'
+                            className='form-control'
+                            defaultValue={new Date().getFullYear()}
+                        />
                     </div>
                     <div className='mb-3'>
                         <button type='submit' className='btn btn-primary'>

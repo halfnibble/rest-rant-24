@@ -10,16 +10,10 @@ router.get('/new', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const newPlace = { ...req.body };
-    if (!newPlace.pic) {
-        newPlace.pic = 'https://via.placeholder.com/300';
-    }
-    if (!newPlace.city) {
-        newPlace.city = 'Unknown';
-    }
-    if (!newPlace.state) {
-        newPlace.state = 'USA';
-    }
+    const newPlace = Object.fromEntries(
+        Object.entries(req.body).filter(([_, value]) => value !== '')
+    );
+
     db.Place.create(newPlace)
         .then((place) => {
             res.redirect('/places');
