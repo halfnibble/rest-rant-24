@@ -32,6 +32,7 @@ router.get('/', (req, res) => {
         })
         .catch((err) => {
             console.log(err);
+            // res.status(404).render('Error404');
             res.status(404).send(render('Error404'));
         });
 });
@@ -44,6 +45,7 @@ router.get('/:id', (req, res) => {
         })
         .catch((err) => {
             console.log(err);
+            // res.status(404).render('Error404');
             res.status(404).send(render('Error404'));
         });
 });
@@ -52,10 +54,12 @@ router.get('/:id', (req, res) => {
 router.get('/:id/edit', (req, res) => {
     db.Place.findById(req.params.id)
         .then((place) => {
+            // res.render('places/Edit', { place });
             res.send(render('places/Edit', { place }));
         })
         .catch((err) => {
             console.log(err);
+            // res.status(404).render('Error404');
             res.status(404).send(render('Error404'));
         });
 });
@@ -67,6 +71,7 @@ router.put('/:id', (req, res) => {
         })
         .catch((err) => {
             console.log(err);
+            // res.status(404).render('Error404');
             res.status(404).send(render('Error404'));
         });
 });
@@ -79,6 +84,7 @@ router.delete('/:id', (req, res) => {
         })
         .catch((err) => {
             console.log(err);
+            // res.status(404).render('Error404');
             res.status(404).send(render('Error404'));
         });
 });
