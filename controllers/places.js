@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const render = require('../render');
-const places = []; // @TODO: Delete this line after connecting to MongoDB
 const db = require('../models');
 
 // Create a new Place
@@ -40,6 +39,7 @@ router.get('/', (req, res) => {
 // GET Details of a Place
 router.get('/:id', (req, res) => {
     db.Place.findById(req.params.id)
+        .populate('comments')
         .then((place) => {
             res.send(render('places/Show', { place }));
         })
@@ -86,6 +86,41 @@ router.delete('/:id', (req, res) => {
             console.log(err);
             // res.status(404).render('Error404');
             res.status(404).send(render('Error404'));
+        });
+});
+
+// COMMENTS
+router.get('/:id/comments/new', (req, res) => {
+    db.Place.findById(req.params.id)
+        .then((place) => {
+            res.send(render('comments/New', { place }));
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(404).send('Not Found');
+        });
+});
+
+router.post('/:id/comments', (req, res) => {
+    let commentData = req.body;
+    commentData.rant = commentData.rant === 'on';
+    commentData.stars = parseFloat(commentData.stars);
+    db.Comment.create(commentData)
+        .then((comment) => {
+            db.Place.findById(req.params.id)
+                .then((place) => {
+                    place.comments.push(comment);
+                    place.save();
+                    res.redirect(`/places/${place._id}`);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    res.status(404).send('Not Found');
+                });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(400).send('Bad Request');
         });
 });
 
